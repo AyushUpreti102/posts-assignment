@@ -3,13 +3,13 @@ export const usePostStore = defineStore("post-store", () => {
   const currentPage = ref(1);
   const totalPosts = ref(0);
   const limit = ref(10);
-  const totalPages = computed(() => Math.floor(totalPosts.value / limit.value));
+  const totalPages = computed(() => Math.ceil(totalPosts.value / limit.value));
   const currentPost = ref<Post | null>(null);
 
   const fetchPosts = async (page: number) => {
     try {
       const { data } = await useApiFetch<PostData>(
-        `posts?limit=${limit.value}&skip=${page * limit.value}`
+        `posts?limit=${limit.value}&skip=${(page - 1) * limit.value}`
       );
 
       posts.value = data.value?.posts || [];

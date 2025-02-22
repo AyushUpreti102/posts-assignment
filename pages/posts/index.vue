@@ -7,6 +7,7 @@
     </div>
     <div class="m-4">
       <app-pagination
+        v-if="posts.length"
         :current-page="currentPage"
         :total-pages="totalPages"
         :chunk="limit"
@@ -30,6 +31,7 @@ useHead({
 
 const handlePageChange = (page: number) => {
   router.push({ query: { page } });
+  window.scrollTo({ top: 0, behavior: "auto" });
 };
 
 watch(
@@ -38,9 +40,7 @@ watch(
     if (query.page) {
       currentPage.value = Number(query.page);
     }
-    postStore.fetchPosts(currentPage.value).then(() => {
-      window.scrollTo({ top: 0, behavior: "auto" });
-    });
+    postStore.fetchPosts(currentPage.value);
   },
   {
     immediate: true,

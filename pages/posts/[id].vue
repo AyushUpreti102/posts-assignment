@@ -22,7 +22,7 @@
       </div>
 
       <div
-        class="h-12 mt-4 grid grid-cols-3 bg-gradient-to-r from-[#FF2760] to-[#8F00FF] rounded-b-lg"
+        class="h-12 mt-4 px-5 flex gap-5 bg-gradient-to-r from-[#FF2760] to-[#8F00FF] rounded-b-lg"
       >
         <button
           class="flex justify-center items-center gap-2 text-white font-medium"

@@ -18,7 +18,7 @@
       </div>
     </div>
     <div
-      class="h-12 mt-4 grid grid-cols-3 bg-gradient-to-r from-[#FF2760] to-[#8F00FF] rounded-b-lg"
+      class="h-12 mt-4 px-5 flex gap-5 bg-gradient-to-r from-[#FF2760] to-[#8F00FF] rounded-b-lg"
     >
       <button class="flex justify-center text-white items-center gap-3">
         <MdiIcon icon="mdiThumbUpOutline" class="text-xl" />
