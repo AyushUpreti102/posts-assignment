@@ -5,22 +5,51 @@
         <post-card :post="post" />
       </router-link>
     </div>
-    <app-pagination
-      :current-page="currentPage"
-      :total-pages="totalPages"
-      @page-change="currentPage = $event"
-    />
+    <div class="m-4">
+      <app-pagination
+        :current-page="currentPage"
+        :total-pages="totalPages"
+        :chunk="limit"
+        @page-change="handlePageChange"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const postStore = usePostStore();
-const { posts, currentPage, totalPages, totalPosts } = storeToRefs(postStore);
+const { posts, currentPage, totalPages, limit } = storeToRefs(postStore);
+
+const router = useRouter();
+const route = useRoute();
 
 useHead({
   title: "Posts",
   meta: [{ name: "description", content: "Posts page showing all the posts" }],
 });
 
-postStore.fetchPosts();
+const handlePageChange = (page: number) => {
+  currentPage.value = page;
+  router.push({ query: { page } });
+  postStore.fetchPosts(page);
+};
+
+if (route.query?.page) {
+  currentPage.value = Number(route.query?.page);
+}
+
+watch(
+  () => route.query,
+  (query) => {
+    if (query.page) {
+      currentPage.value = Number(query.page);
+      postStore.fetchPosts(Number(query.page));
+    } else {
+      router.push({ query: { page: 1 } });
+    }
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
