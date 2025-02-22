@@ -29,9 +29,7 @@ useHead({
 });
 
 const handlePageChange = (page: number) => {
-  currentPage.value = page;
   router.push({ query: { page } });
-  postStore.fetchPosts(page);
 };
 
 if (route.query?.page) {

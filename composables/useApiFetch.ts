@@ -15,11 +15,11 @@ export const useApiFetch = async <T>(endpoint: string) => {
         return;
       }
 
-      const expirationDate = new Date(data.fetchedAt);
-      expirationDate.setTime(expirationDate.getTime() * 1000);
-      const isExpired = expirationDate.getTime() < Date.now();
+      const fetchedAt = data.fetchedAt.getTime();
+      const expirationTime = 15 * 60 * 1000;
+      const currentTime = Date.now();
+      const isExpired = currentTime - fetchedAt > expirationTime;
 
-      console.log(isExpired, key);
       if (isExpired) {
         return;
       }
