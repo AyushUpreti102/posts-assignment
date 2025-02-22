@@ -38,7 +38,9 @@ watch(
     if (query.page) {
       currentPage.value = Number(query.page);
     }
-    postStore.fetchPosts(currentPage.value);
+    postStore.fetchPosts(currentPage.value).then(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    });
   },
   {
     immediate: true,
