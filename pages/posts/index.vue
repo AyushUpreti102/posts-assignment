@@ -32,19 +32,13 @@ const handlePageChange = (page: number) => {
   router.push({ query: { page } });
 };
 
-if (route.query?.page) {
-  currentPage.value = Number(route.query?.page);
-}
-
 watch(
   () => route.query,
   (query) => {
     if (query.page) {
       currentPage.value = Number(query.page);
-      postStore.fetchPosts(Number(query.page));
-    } else {
-      router.push({ query: { page: 1 } });
     }
+    postStore.fetchPosts(currentPage.value);
   },
   {
     immediate: true,

@@ -2,7 +2,16 @@
   <div class="rounded-lg shadow-lg bg-white mt-6">
     <div class="px-5">
       <div class="pt-6">
-        <span class="font-semibold">Topic - {{ post.title }}</span>
+        <span class="font-semibold text-xl">Topic - {{ post.title }}</span>
+      </div>
+      <div class="flex flex-wrap gap-x-4 my-2">
+        <div
+          class="bg-slate-100 p-2 rounded-2xl"
+          v-for="tag in post.tags"
+          :key="tag"
+        >
+          #{{ tag }}
+        </div>
       </div>
       <div class="mt-5 bg-[#f2efef] rounded-lg py-4 px-6">
         <p>{{ post.body }}</p>
